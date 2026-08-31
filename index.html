@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <title>Educational Inequality & Socioeconomic Analytics | ENEM x IBGE</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js (Local with CDN Fallback) -->
+  <script src="js/chart.umd.min.js?v=1.4"></script>
+  <script>if (typeof Chart === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>');</script>
+  
+  <!-- Lucide Icons (Local with CDN Fallback) -->
+  <script src="js/lucide.min.js?v=1.4"></script>
+  <script>if (typeof lucide === 'undefined') document.write('<script src="https://unpkg.com/lucide@latest"><\/script>');</script>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css?v=1.4">
+</head>
+<body class="dark-theme">
+  <div class="app-container">
+    
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="logo-icon">
+          <i data-lucide="graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+          <h1>EduData Analytics <span>ENEM x IBGE</span></h1>
+          <p>Microdados Socioeconômicos, Econometria & Políticas Públicas</p>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <div class="badge live-badge">
+          <span class="pulse-dot"></span> 5.000 Microdados Analisados
+        </div>
+        <button id="btn-export-summary" class="btn btn-outline">
+          <i data-lucide="download"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </header>
+    
+    <!-- Key Performance Metrics Strip -->
+    <section class="kpi-strip">
+      <div class="kpi-card glass-card">
+        <div class="kpi-icon icon-purple"><i data-lucide="calculator"></i></div>
+        <div class="kpi-content">
+          <span class="kpi-title">Gini de Desigualdade</span>
+          <h3 id="kpi-gini">0.0858</h3>
+          <span class="kpi-desc">Concentração de Notas no ENEM</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-card">
+        <div class="kpi-icon icon-cyan"><i data-lucide="split"></i></div>
+        <div class="kpi-content">
+          <span class="kpi-title">Gap Privada vs. Pública</span>
+          <h3 id="kpi-gap">+140.3 pts</h3>
+          <span class="kpi-desc">Disparidade Média Nacional</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-card">
+        <div class="kpi-icon icon-emerald"><i data-lucide="trending-up"></i></div>
+        <div class="kpi-content">
+          <span class="kpi-title">Ajuste do Modelo (OLS R²)</span>
+          <h3 id="kpi-r2">76.16%</h3>
+          <span class="kpi-desc">Variância Explicada pelo Fatores</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-card">
+        <div class="kpi-icon icon-amber"><i data-lucide="building-2"></i></div>
+        <div class="kpi-content">
+          <span class="kpi-title">Impacto da Infraestrutura</span>
+          <h3 id="kpi-infra-gain">+74.8 pts</h3>
+          <span class="kpi-desc">Com Score Infra Completo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs-container">
+      <button class="nav-tab active" data-tab="tab-overview">
+        <i data-lucide="layout-dashboard"></i> Panorama & Disparidade
+      </button>
+      <button class="nav-tab" data-tab="tab-infrastructure">
+        <i data-lucide="school"></i> Infraestrutura Escolar
+      </button>
+      <button class="nav-tab" data-tab="tab-econometrics">
+        <i data-lucide="brain-circuit"></i> Econometria & Machine Learning
+      </button>
+      <button class="nav-tab" data-tab="tab-simulator">
+        <i data-lucide="sliders"></i> Simulador de Políticas Públicas
+      </button>
+      <button class="nav-tab" data-tab="tab-explorer">
+        <i data-lucide="table"></i> Data Explorer (Microdados)
+      </button>
+    </nav>
+
+    <!-- Main Content Panels -->
+    <main class="app-main">
+
+      <!-- TAB 1: PANORAMA & DISPARIDADE -->
+      <section id="tab-overview" class="tab-panel active">
+        <div class="grid grid-2">
+          
+          <!-- Chart: Disparidade por Faixa de Renda -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Disparidade de Desempenho por Faixa de Renda</h3>
+                <p class="card-subtitle">Média das Notas no ENEM divididas pelas Classes de Renda Familiar (A a E)</p>
+              </div>
+              <div class="card-tag">Renda x Desempenho</div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartIncomeDisparity"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart: Pública vs Privada por Disciplina -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Comparativo de Competências: Pública vs. Privada</h3>
+                <p class="card-subtitle">Desempenho relativo nas 5 áreas de conhecimento avaliadas no ENEM</p>
+              </div>
+              <div class="card-tag">Escola Pública vs Privada</div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartSchoolComparison"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="grid grid-3 mt-4">
+          <!-- Disparidade Regional -->
+          <div class="card glass-card col-span-2">
+            <div class="card-header">
+              <div>
+                <h3>Desempenho e Indicadores Socioeconômicos por Região</h3>
+                <p class="card-subtitle">Cruzamento de Nota Média com PIB per capita e Infraestrutura regional</p>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartRegionalDisparity"></canvas>
+            </div>
+          </div>
+
+          <!-- Destaque Socioeconômico -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <h3>💡 Principais Achados Socioeconômicos</h3>
+            </div>
+            <div class="insights-list">
+              <div class="insight-item">
+                <div class="insight-badge badge-danger">Impacto Renda</div>
+                <p>Estudantes da <strong>Classe A</strong> obtêm em média <strong>215+ pontos a mais</strong> em Matemática do que alunos da <strong>Classe E</strong>.</p>
+              </div>
+              <div class="insight-item">
+                <div class="insight-badge badge-warning">Redação & Capital Cultural</div>
+                <p>A escolaridade da mãe e o acesso a livros/internet são os principais preditores da nota na Redação.</p>
+              </div>
+              <div class="insight-item">
+                <div class="insight-badge badge-info">Efeito Município</div>
+                <p>Municípios com PIB per capita elevado concentram escolas com infraestrutura de ponta, amplificando o diferencial socioeconômico.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: INFRAESTRUTURA ESCOLAR -->
+      <section id="tab-infrastructure" class="tab-panel">
+        <div class="grid grid-2">
+          
+          <!-- Impacto de Cada Item de Infraestrutura na Escola Pública -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Ganho de Pontuação por Item de Infraestrutura (Escolas Públicas)</h3>
+                <p class="card-subtitle">Diferença de nota média entre escolas públicas com vs. sem o recurso</p>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartInfraImpact"></canvas>
+            </div>
+          </div>
+
+          <!-- Taxa de Acesso por Tipo de Escola -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Abismo Tecnológico & Estrutural nas Escolas</h3>
+                <p class="card-subtitle">Percentual de cobertura de equipamentos nas redes pública e privada</p>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartInfraCoverage"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card glass-card mt-4">
+          <div class="card-header">
+            <h3>Matriz de Infraestrutura e Retorno Educacional</h3>
+            <p class="card-subtitle">Resumo estatístico do ganho populacional estimado na rede pública</p>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="table-infra-summary">
+              <thead>
+                <tr>
+                  <th>Recurso de Infraestrutura</th>
+                  <th>Escolas Públicas c/ Recurso</th>
+                  <th>Nota Média (Com)</th>
+                  <th>Nota Média (Sem)</th>
+                  <th>Diferencial Estrutural</th>
+                  <th>Relevância Estatística</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Preenchido via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: ECONOMETRIA & MACHINE LEARNING -->
+      <section id="tab-econometrics" class="tab-panel">
+        <div class="grid grid-2">
+          
+          <!-- OLS Regression Table -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Regressão Múltipla OLS (Ordinary Least Squares)</h3>
+                <p class="card-subtitle">Variável Dependente: Nota Geral no ENEM (\(R^2 = 0.7616\))</p>
+              </div>
+              <div class="card-tag">Modelagem Econométrica</div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-ols-results">
+                <thead>
+                  <tr>
+                    <th>Variável Explicativa</th>
+                    <th>Coeficiente (\(\beta\))</th>
+                    <th>Erro Padrão</th>
+                    <th>Valor-p</th>
+                    <th>Int. Confiança 95%</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Preenchido via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Random Forest Feature Importance -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <div>
+                <h3>Importância das Variáveis (Random Forest Regressor)</h3>
+                <p class="card-subtitle">Contribuição percentual de cada fator na explicação das notas</p>
+              </div>
+              <div class="chart-container">
+                <canvas id="chartFeatureImportance"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Matriz de Correlação de Pearson -->
+        <div class="card glass-card mt-4">
+          <div class="card-header">
+            <h3>Matriz de Correlação de Pearson entre Indicadores Socioeconômicos</h3>
+            <p class="card-subtitle">Intensidade da associação linear entre renda, PIB, infraestrutura e notas</p>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table heatmap-table" id="table-correlation-matrix">
+              <thead>
+                <!-- Preenchido via JavaScript -->
+              </thead>
+              <tbody>
+                <!-- Preenchido via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SIMULADOR DE POLÍTICAS PÚBLICAS -->
+      <section id="tab-simulator" class="tab-panel">
+        <div class="grid grid-3">
+          
+          <!-- Control Panel Sliders -->
+          <div class="card glass-card col-span-1">
+            <div class="card-header">
+              <h3>⚙️ Painel de Intervenções</h3>
+              <p class="card-subtitle">Simule investimentos em infraestrutura e renda</p>
+            </div>
+            
+            <div class="simulator-controls">
+              
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acesso à Internet Banda Larga (Escolas Públicas)</span>
+                  <strong id="val-sim-internet">65%</strong>
+                </div>
+                <input type="range" id="slider-sim-internet" min="0" max="100" value="65" class="slider">
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Laboratórios de Ciências</span>
+                  <strong id="val-sim-lab">35%</strong>
+                </div>
+                <input type="range" id="slider-sim-lab" min="0" max="100" value="35" class="slider">
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Bibliotecas & Salas de Estudo</span>
+                  <strong id="val-sim-biblio">55%</strong>
+                </div>
+                <input type="range" id="slider-sim-biblio" min="0" max="100" value="55" class="slider">
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Salas de Informática com PCs</span>
+                  <strong id="val-sim-pcs">50%</strong>
+                </div>
+                <input type="range" id="slider-sim-pcs" min="0" max="100" value="50" class="slider">
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Incremento na Renda Familiar Média</span>
+                  <strong id="val-sim-income">+0%</strong>
+                </div>
+                <input type="range" id="slider-sim-income" min="0" max="100" step="5" value="0" class="slider">
+              </div>
+
+              <button id="btn-reset-simulator" class="btn btn-secondary w-full mt-3">
+                <i data-lucide="rotate-ccw"></i> Resetar Simulação
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Simulation Impact Output -->
+          <div class="card glass-card col-span-2">
+            <div class="card-header">
+              <div>
+                <h3>📊 Projeção de Impacto Educacional</h3>
+                <p class="card-subtitle">Estimativa econométrica dos efeitos da intervenção simulada no ENEM</p>
+              </div>
+            </div>
+
+            <div class="grid grid-3 mb-4">
+              <div class="sim-metric-card">
+                <span class="sim-metric-title">Nota Média Pública Atual</span>
+                <h4 id="sim-current-score">533.5 pts</h4>
+              </div>
+
+              <div class="sim-metric-card highlight-green">
+                <span class="sim-metric-title">Nota Média Estimada</span>
+                <h4 id="sim-projected-score">533.5 pts</h4>
+                <span class="sim-metric-delta" id="sim-delta-score">+0.0 pts</span>
+              </div>
+
+              <div class="sim-metric-card highlight-purple">
+                <span class="sim-metric-title">Redução no Gap Público-Privado</span>
+                <h4 id="sim-gap-reduction">0.0%</h4>
+                <span class="sim-metric-sub">De 140.3 pts para 140.3 pts</span>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="chartSimulationImpact"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 5: DATA EXPLORER -->
+      <section id="tab-explorer" class="tab-panel">
+        <div class="card glass-card">
+          <div class="card-header flex-between">
+            <div>
+              <h3>Amostra dos Microdados ENEM x IBGE</h3>
+              <p class="card-subtitle">Consulte e filtre individualmente os registros dos alunos</p>
+            </div>
+            <div class="explorer-filters">
+              <input type="text" id="search-explorer" placeholder="Buscar por UF ou Região..." class="form-input">
+              <select id="filter-escola" class="form-select">
+                <option value="ALL">Todos os Tipos de Escola</option>
+                <option value="Pública">Escola Pública</option>
+                <option value="Privada">Escola Privada</option>
+              </select>
+              <select id="filter-renda" class="form-select">
+                <option value="ALL">Todas as Faixas de Renda</option>
+                <option value="Classe E (Até 1.5 SM)">Classe E</option>
+                <option value="Classe D (1.5 a 3 SM)">Classe D</option>
+                <option value="Classe C (3 a 6 SM)">Classe C</option>
+                <option value="Classe B (6 a 12 SM)">Classe B</option>
+                <option value="Classe A (Acima 12 SM)">Classe A</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="data-table" id="table-microdata">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>UF</th>
+                  <th>Região</th>
+                  <th>Tipo Escola</th>
+                  <th>Faixa de Renda</th>
+                  <th>PIB per capita (R$)</th>
+                  <th>Infra Score</th>
+                  <th>Nota MT</th>
+                  <th>Nota Redação</th>
+                  <th>Nota Geral</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Preenchido via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-pagination">
+            <span id="pagination-info">Exibindo 1-15 de 500 registros</span>
+            <div class="pagination-buttons">
+              <button id="btn-prev-page" class="btn btn-sm btn-secondary" disabled>Anterior</button>
+              <button id="btn-next-page" class="btn btn-sm btn-secondary">Próximo</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>🎓 <strong>Educational Inequality & Socioeconomic Analytics Project</strong> | Dados abertos ENEM / INEP & IBGE</p>
+      <p class="text-muted">Desenvolvido com Estatística Computacional, Econometria (OLS) e Machine Learning</p>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Modules (Loaded Offline & Versioned) -->
+  <script src="js/embedded_data.js?v=1.4"></script>
+  <script src="js/data.js?v=1.4"></script>
+  <script src="js/charts.js?v=1.4"></script>
+  <script src="js/econometrics.js?v=1.4"></script>
+  <script src="js/simulator.js?v=1.4"></script>
+  <script src="js/app.js?v=1.4"></script>
+
+  <script>
+    // Inline Fail-Safe Trigger
+    window.addEventListener('load', () => {
+      console.log('🚀 Guaranteeing render completion on window load...');
+      if (window.EduCharts) EduCharts.renderAll();
+      if (window.EduEconometrics) {
+        EduEconometrics.renderOLS();
+        EduEconometrics.renderCorrelationMatrix();
+        EduEconometrics.renderInfraSummaryTable();
+      }
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
