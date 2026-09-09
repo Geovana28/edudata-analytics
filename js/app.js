@@ -32,6 +32,11 @@ const App = {
 
     // 5. Initial Data Explorer population
     this.initDataExplorer();
+
+    // 6. Create Icons
+    if (window.lucide && window.lucide.createIcons) {
+      window.lucide.createIcons();
+    }
   },
 
   renderKPIs() {
@@ -73,16 +78,31 @@ const App = {
         const targetPanel = document.getElementById(targetId);
         if (targetPanel) targetPanel.classList.add('active');
 
-        // Force render visual charts and econometric tables when tab switches
-        setTimeout(() => {
-          if (window.EduCharts) EduCharts.renderAll();
-          if (window.EduEconometrics) {
-            EduEconometrics.renderOLS();
-            EduEconometrics.renderCorrelationMatrix();
-            EduEconometrics.renderInfraSummaryTable();
-          }
-          if (window.EduSimulator) EduSimulator.calculateImpact();
-        }, 30);
+        // Renderizar ou redimensionar elementos da aba selecionada
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            if (targetId === 'tab-overview' && window.EduCharts) {
+              EduCharts.renderOverviewCharts();
+            } else if (targetId === 'tab-infrastructure') {
+              if (window.EduCharts) EduCharts.renderInfraCharts();
+              if (window.EduEconometrics) EduEconometrics.renderInfraSummaryTable();
+            } else if (targetId === 'tab-econometrics') {
+              if (window.EduEconometrics) {
+                EduEconometrics.renderOLS();
+                EduEconometrics.renderCorrelationMatrix();
+              }
+              if (window.EduCharts) EduCharts.renderEconometricsCharts();
+            } else if (targetId === 'tab-simulator') {
+              if (window.EduSimulator) EduSimulator.calculateImpact();
+            } else if (targetId === 'tab-explorer') {
+              App.renderExplorerTable();
+            }
+
+            if (window.EduCharts && EduCharts.resizeAll) {
+              EduCharts.resizeAll();
+            }
+          }, 50);
+        });
       });
     });
   },
@@ -252,9 +272,16 @@ const App = {
   }
 };
 
-// Initialize Application
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => App.init());
-} else {
+// Initialize Application safely
+function startApp() {
+  if (window._appInitialized) return;
+  window._appInitialized = true;
   App.init();
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}
+window.addEventListener('load', startApp);

@@ -14,47 +14,55 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Chart.js (Local with CDN Fallback) -->
-  
-  
-  
-  <!-- Lucide Icons (Local with CDN Fallback) -->
-  
-  
   
   <!-- Main Stylesheet -->
   <style>/* ==========================================================================
-   Educational Inequality Analytics - Custom Design System & CSS Tokens
+   EduData Analytics - Minimalist Clean & Executive Light Design System
    ========================================================================== */
 
 :root {
-  --bg-dark: #090d16;
-  --bg-card: rgba(17, 24, 39, 0.75);
-  --bg-card-hover: rgba(24, 34, 53, 0.85);
-  --bg-input: rgba(31, 41, 55, 0.8);
+  /* Surface & Background Colors */
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-subtle: #f1f5f9;
+  --bg-input: #ffffff;
   
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-glow: rgba(139, 92, 246, 0.3);
+  /* Borders & Dividers */
+  --border-color: #e2e8f0;
+  --border-color-hover: #cbd5e1;
+  --border-focus: #2563eb;
+
+  /* Primary & Accent Palette (Clean Corporate) */
+  --primary-blue: #1d4ed8;
+  --primary-indigo: #4338ca;
+  --accent-teal: #0d9488;
+  --accent-emerald: #16a34a;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
   
-  --primary-purple: #8b5cf6;
-  --primary-purple-glow: rgba(139, 92, 246, 0.25);
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-rose: #f43f5e;
+  /* Text Hierarchy */
+  --text-main: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
   
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-dim: #6b7280;
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
   
-  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
+  /* Radii */
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
   
-  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Reset & Global Base */
@@ -64,25 +72,20 @@
   padding: 0;
 }
 
-body.dark-theme {
-  background-color: var(--bg-dark);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.10) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
-  background-attachment: fixed;
-  color: var(--text-main);
+body {
+  background-color: var(--bg-app);
+  color: var(--text-body);
   font-family: var(--font-body);
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Layout Container */
+/* App Container */
 .app-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -95,10 +98,9 @@ body.dark-theme {
   align-items: center;
   padding: 20px 28px;
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .header-brand {
@@ -108,42 +110,48 @@ body.dark-theme {
 }
 
 .logo-icon {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--primary-purple), var(--accent-cyan));
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-indigo));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 20px var(--primary-purple-glow);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
 }
 
 .brand-text h1 {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
 }
 
 .brand-text h1 span {
-  color: var(--accent-cyan);
+  color: var(--primary-blue);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
 }
 
 .brand-text p {
   font-size: 0.85rem;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-/* Badges & Dots */
+/* Badges & Indicators */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -151,9 +159,10 @@ body.dark-theme {
   padding: 6px 14px;
   border-radius: 9999px;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-subtle);
+  color: var(--text-main);
 }
 
 .pulse-dot {
@@ -161,14 +170,14 @@ body.dark-theme {
   height: 8px;
   border-radius: 50%;
   background-color: var(--accent-emerald);
-  box-shadow: 0 0 10px var(--accent-emerald);
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
 }
 
 /* Buttons */
@@ -177,7 +186,7 @@ body.dark-theme {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 18px;
+  padding: 9px 18px;
   border-radius: var(--radius-md);
   font-family: var(--font-body);
   font-size: 0.875rem;
@@ -188,26 +197,27 @@ body.dark-theme {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-card);
   color: var(--text-main);
   border-color: var(--border-color);
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--primary-purple);
+  background: var(--bg-subtle);
+  border-color: var(--border-color-hover);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: rgba(139, 92, 246, 0.15);
-  color: var(--primary-purple);
-  border-color: rgba(139, 92, 246, 0.3);
+  background: #eff6ff;
+  color: var(--primary-blue);
+  border-color: #dbeafe;
 }
 
 .btn-secondary:hover {
-  background: rgba(139, 92, 246, 0.25);
-  border-color: var(--primary-purple);
+  background: #dbeafe;
+  border-color: #bfdbfe;
 }
 
 .btn-sm {
@@ -226,18 +236,18 @@ body.dark-theme {
   gap: 16px;
 }
 
-.glass-card {
+.glass-card, .card {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
   transition: var(--transition-smooth);
 }
 
-.glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+.glass-card:hover, .card:hover {
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .kpi-card {
@@ -247,48 +257,52 @@ body.dark-theme {
 }
 
 .kpi-icon {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.icon-purple { background: rgba(139, 92, 246, 0.15); color: var(--primary-purple); }
-.icon-cyan { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
-.icon-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
-.icon-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+.icon-purple { background: #eff6ff; color: var(--primary-blue); }
+.icon-cyan { background: #f0fdfa; color: var(--accent-teal); }
+.icon-emerald { background: #f0fdf4; color: var(--accent-emerald); }
+.icon-amber { background: #fffbeb; color: var(--accent-amber); }
 
 .kpi-title {
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .kpi-content h3 {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
   line-height: 1.2;
+  margin-top: 2px;
 }
 
 .kpi-desc {
-  font-size: 0.75rem;
-  color: var(--text-dim);
+  font-size: 0.775rem;
+  color: var(--text-muted);
 }
 
 /* Navigation Tabs */
 .nav-tabs-container {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   padding: 6px;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow-x: auto;
+  box-shadow: var(--shadow-xs);
 }
 
 .nav-tab {
@@ -309,21 +323,21 @@ body.dark-theme {
 }
 
 .nav-tab:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  background: var(--bg-subtle);
 }
 
 .nav-tab.active {
-  background: var(--primary-purple);
-  color: #fff;
+  background: var(--primary-blue);
+  color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 4px 14px var(--primary-purple-glow);
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
 }
 
 /* Main Content Area */
 .tab-panel {
   display: none;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.25s ease-out;
 }
 
 .tab-panel.active {
@@ -331,7 +345,7 @@ body.dark-theme {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -353,29 +367,31 @@ body.dark-theme {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .card-header h3 {
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
 }
 
 .card-subtitle {
-  font-size: 0.8rem;
+  font-size: 0.825rem;
   color: var(--text-muted);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .card-tag {
   padding: 4px 10px;
   border-radius: var(--radius-sm);
-  background: rgba(139, 92, 246, 0.12);
-  color: var(--primary-purple);
+  background: #eff6ff;
+  color: var(--primary-blue);
   font-size: 0.75rem;
   font-weight: 600;
+  border: 1px solid #dbeafe;
 }
 
 /* Chart Canvas Container */
@@ -393,10 +409,11 @@ body.dark-theme {
 }
 
 .insight-item {
-  padding: 12px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
-  border-left: 3px solid var(--primary-purple);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-blue);
 }
 
 .insight-badge {
@@ -405,21 +422,25 @@ body.dark-theme {
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 4px;
+  letter-spacing: 0.05em;
 }
 
-.badge-danger { color: var(--accent-rose); }
-.badge-warning { color: var(--accent-amber); }
-.badge-info { color: var(--accent-cyan); }
+.badge-danger { color: var(--accent-rose); background: #ffe4e6; padding: 2px 6px; border-radius: 4px; }
+.badge-warning { color: var(--accent-amber); background: #fef3c7; padding: 2px 6px; border-radius: 4px; }
+.badge-info { color: var(--primary-blue); background: #dbeafe; padding: 2px 6px; border-radius: 4px; }
 
 .insight-item p {
-  font-size: 0.825rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-body);
+  line-height: 1.45;
 }
 
 /* Data Tables */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
 }
 
 .data-table {
@@ -430,23 +451,27 @@ body.dark-theme {
 }
 
 .data-table th {
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-muted);
+  padding: 12px 16px;
+  background: var(--bg-subtle);
+  color: var(--text-main);
   font-weight: 600;
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
 .data-table td {
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-body);
   white-space: nowrap;
 }
 
 .data-table tbody tr:hover {
-  background: var(--bg-card-hover);
+  background: var(--bg-subtle);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Heatmap Table Cell Styling */
@@ -473,11 +498,13 @@ body.dark-theme {
   display: flex;
   justify-content: space-between;
   font-size: 0.825rem;
-  color: var(--text-muted);
+  color: var(--text-body);
+  font-weight: 500;
 }
 
 .control-label strong {
-  color: var(--accent-cyan);
+  color: var(--primary-blue);
+  font-weight: 700;
 }
 
 .slider {
@@ -486,7 +513,7 @@ body.dark-theme {
   width: 100%;
   height: 6px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #cbd5e1;
   outline: none;
   transition: var(--transition-smooth);
 }
@@ -497,18 +524,18 @@ body.dark-theme {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--primary-purple);
+  background: var(--primary-blue);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--primary-purple-glow);
+  box-shadow: 0 2px 6px rgba(29, 78, 216, 0.4);
   transition: var(--transition-smooth);
 }
 
 .slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .sim-metric-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 16px;
@@ -518,8 +545,9 @@ body.dark-theme {
 
 .sim-metric-title {
   font-size: 0.75rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .sim-metric-card h4 {
@@ -527,10 +555,11 @@ body.dark-theme {
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 4px;
+  color: var(--text-main);
 }
 
 .highlight-green h4 { color: var(--accent-emerald); }
-.highlight-purple h4 { color: var(--primary-purple); }
+.highlight-purple h4 { color: var(--primary-blue); }
 
 .sim-metric-delta {
   font-size: 0.8rem;
@@ -540,7 +569,7 @@ body.dark-theme {
 
 .sim-metric-sub {
   font-size: 0.75rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
 }
 
 /* Data Explorer Filters */
@@ -561,7 +590,7 @@ body.dark-theme {
   background: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 8px 12px;
+  padding: 8px 14px;
   color: var(--text-main);
   font-family: var(--font-body);
   font-size: 0.825rem;
@@ -570,8 +599,8 @@ body.dark-theme {
 }
 
 .form-input:focus, .form-select:focus {
-  border-color: var(--primary-purple);
-  box-shadow: 0 0 8px var(--primary-purple-glow);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .table-pagination {
@@ -581,7 +610,7 @@ body.dark-theme {
   margin-top: 16px;
   padding-top: 12px;
   border-top: 1px solid var(--border-color);
-  font-size: 0.8rem;
+  font-size: 0.825rem;
   color: var(--text-muted);
 }
 
@@ -615,7 +644,7 @@ body.dark-theme {
 }
 </style>
 </head>
-<body class="dark-theme">
+<body class="light-theme">
   <div class="app-container">
     
     <!-- Top Navigation Header -->
@@ -862,14 +891,14 @@ body.dark-theme {
 
           <!-- Random Forest Feature Importance -->
           <div class="card glass-card">
-            <div class="card-header">
+                        <div class="card-header">
               <div>
                 <h3>Importância das Variáveis (Random Forest Regressor)</h3>
                 <p class="card-subtitle">Contribuição percentual de cada fator na explicação das notas</p>
               </div>
-              <div class="chart-container">
-                <canvas id="chartFeatureImportance"></canvas>
-              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartFeatureImportance"></canvas>
             </div>
           </div>
 
@@ -1066,21 +1095,7 @@ body.dark-theme {
   
   
 
-  <script>
-    // Inline Fail-Safe Trigger
-    window.addEventListener('load', () => {
-      console.log('🚀 Guaranteeing render completion on window load...');
-      if (window.EduCharts) EduCharts.renderAll();
-      if (window.EduEconometrics) {
-        EduEconometrics.renderOLS();
-        EduEconometrics.renderCorrelationMatrix();
-        EduEconometrics.renderInfraSummaryTable();
-      }
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-    });
-  </script>
+
 
 <script>
 /**
@@ -1278,7 +1293,7 @@ const EMBEDDED_DATASET = {
         "qtd": 1503
       },
       {
-        "faixa_renda": "Classe E (Até 1.5 SM)",
+        "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
         "nota_media": 508.6,
         "nota_mt": 543.7,
         "nota_redacao": 526.1,
@@ -1301,7 +1316,7 @@ const EMBEDDED_DATASET = {
         "qtd": 1365
       },
       {
-        "tp_escola": "Pública",
+        "tp_escola": "PÃºblica",
         "nota_media": 533.5,
         "nota_cn": 484.6,
         "nota_ch": 536.6,
@@ -1362,13 +1377,13 @@ const EMBEDDED_DATASET = {
     ],
     "infra_impact_publica": [
       {
-        "item": "Acesso à Internet Banda Larga",
+        "item": "Acesso a Internet Banda Larga",
         "com_item": 546.1,
         "sem_item": 505.6,
         "diferenca_pontos": 40.5
       },
       {
-        "item": "Laboratório de Ciências",
+        "item": "LaboratÃ³rio de CiÃªncias",
         "com_item": 554.1,
         "sem_item": 520.2,
         "diferenca_pontos": 33.9
@@ -1402,7 +1417,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 13804.02,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -1428,7 +1443,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4176.11,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -1454,7 +1469,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4332.75,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -1478,9 +1493,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 48544.54,
       "renda_num": 1237.58,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -1532,7 +1547,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7162.23,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -1558,7 +1573,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3649.82,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -1582,9 +1597,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 29392.5,
       "renda_num": 1198.98,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -1610,7 +1625,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3158.8,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -1634,9 +1649,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 19374.38,
       "renda_num": 1741.41,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -1688,7 +1703,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7678.59,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -1714,7 +1729,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3055.35,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -1764,9 +1779,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 56786.68,
       "renda_num": 1497.84,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -1790,9 +1805,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 52266.8,
       "renda_num": 1626.83,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -1816,9 +1831,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 33462.87,
       "renda_num": 1202.23,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -1868,9 +1883,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 25190.38,
       "renda_num": 1359.8,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -1894,9 +1909,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 19481.74,
       "renda_num": 1737.38,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -1922,7 +1937,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4069.49,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -1946,9 +1961,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 84505.21,
       "renda_num": 1508.76,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -1974,7 +1989,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7195.42,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2026,7 +2041,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3150.9,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2052,7 +2067,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8949.97,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2078,7 +2093,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3992.83,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -2104,7 +2119,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3859.41,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2180,9 +2195,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 32338.68,
       "renda_num": 1405.63,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -2208,7 +2223,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3154.69,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -2232,9 +2247,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 62215.48,
       "renda_num": 1484.18,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2284,9 +2299,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 105537.7,
       "renda_num": 1662.49,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2338,7 +2353,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4069.05,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -2414,9 +2429,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 30919.8,
       "renda_num": 1270.57,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2440,9 +2455,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 35683.52,
       "renda_num": 1445.12,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2468,7 +2483,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3409.52,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -2492,9 +2507,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 78722.7,
       "renda_num": 1400.18,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2518,9 +2533,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 44883.85,
       "renda_num": 1737.37,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2546,7 +2561,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 14681.76,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -2572,7 +2587,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8161.24,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -2596,7 +2611,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 74540.55,
       "renda_num": 1194.83,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -2624,7 +2639,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4136.92,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2650,7 +2665,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8133.71,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -2702,7 +2717,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8395.26,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2726,9 +2741,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 12066.96,
       "renda_num": 1682.46,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -2780,7 +2795,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 2998.76,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -2806,7 +2821,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4046.21,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2858,7 +2873,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3304.96,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -2884,7 +2899,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3526.87,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -2908,9 +2923,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 27905.87,
       "renda_num": 1323.75,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2934,9 +2949,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 20862.51,
       "renda_num": 1446.35,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2960,9 +2975,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 53974.16,
       "renda_num": 1697.31,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -2986,7 +3001,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 60991.4,
       "renda_num": 1253.64,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -3014,7 +3029,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4097.56,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3038,9 +3053,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 46114.24,
       "renda_num": 1658.2,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3064,9 +3079,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29109.73,
       "renda_num": 1368.54,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3090,9 +3105,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 59893.02,
       "renda_num": 1230.61,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -3144,7 +3159,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3219.3,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -3170,7 +3185,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3218.57,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3194,9 +3209,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 56496.76,
       "renda_num": 1497.67,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -3248,7 +3263,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3595.38,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3274,7 +3289,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3688.31,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3300,7 +3315,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3375.79,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -3430,7 +3445,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 14785.08,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -3456,7 +3471,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12970.96,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3482,7 +3497,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3138.89,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3508,7 +3523,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3279.78,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3534,7 +3549,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3301.06,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -3560,7 +3575,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 9039.82,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3586,7 +3601,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 2986.89,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -3612,7 +3627,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3563.35,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -3664,7 +3679,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4104.95,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3688,9 +3703,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 42955.53,
       "renda_num": 1417.57,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3740,9 +3755,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 49258.28,
       "renda_num": 1369.52,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -3768,7 +3783,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3713.61,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3794,7 +3809,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4012.24,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3818,9 +3833,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 61246.95,
       "renda_num": 1319.96,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -3870,7 +3885,7 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 49606.68,
       "renda_num": 1238.42,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -3898,7 +3913,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3377.16,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3924,7 +3939,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3418.68,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -3976,7 +3991,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7590.0,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -4000,9 +4015,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 60126.07,
       "renda_num": 1373.12,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4028,7 +4043,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3451.31,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4054,7 +4069,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4236.06,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -4106,7 +4121,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3883.82,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4132,7 +4147,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6515.89,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -4158,7 +4173,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 9242.94,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -4184,7 +4199,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3585.47,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4236,7 +4251,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4186.9,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4262,7 +4277,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4145.57,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -4312,9 +4327,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 35964.91,
       "renda_num": 1292.44,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -4340,7 +4355,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3000.7,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -4364,7 +4379,7 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 21850.21,
       "renda_num": 1227.52,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -4418,7 +4433,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12642.41,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -4442,9 +4457,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 21517.84,
       "renda_num": 1515.34,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -4468,9 +4483,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 43741.64,
       "renda_num": 1456.59,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -4496,7 +4511,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3221.98,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 1,
@@ -4522,7 +4537,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3214.08,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4546,9 +4561,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 27557.27,
       "renda_num": 1455.12,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -4572,9 +4587,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 52685.27,
       "renda_num": 1499.31,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -4600,7 +4615,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4200.01,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4624,9 +4639,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 39342.54,
       "renda_num": 1465.96,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4650,9 +4665,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 34352.03,
       "renda_num": 1393.05,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4676,9 +4691,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 17821.26,
       "renda_num": 1672.51,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -4704,7 +4719,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3634.1,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4730,7 +4745,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3497.49,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4780,9 +4795,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 23109.55,
       "renda_num": 1576.74,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4806,9 +4821,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 125362.18,
       "renda_num": 1291.81,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -4832,7 +4847,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 51586.6,
       "renda_num": 1307.81,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -4860,7 +4875,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6723.82,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -4886,7 +4901,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3511.95,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -4912,7 +4927,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3669.85,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -4936,9 +4951,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 65102.89,
       "renda_num": 1262.68,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -4964,7 +4979,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3832.76,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -4988,9 +5003,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 18972.55,
       "renda_num": 1224.28,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -5014,9 +5029,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 65465.09,
       "renda_num": 1474.42,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5042,7 +5057,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 15850.78,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -5066,9 +5081,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 54319.4,
       "renda_num": 1744.52,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5092,9 +5107,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 28438.42,
       "renda_num": 1290.15,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -5120,7 +5135,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 14366.43,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -5144,9 +5159,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 25401.02,
       "renda_num": 1575.92,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -5276,7 +5291,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3204.5,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5300,9 +5315,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 36005.06,
       "renda_num": 1683.76,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -5326,9 +5341,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 86545.79,
       "renda_num": 1371.69,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5354,7 +5369,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3282.05,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5378,9 +5393,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 43380.13,
       "renda_num": 1716.7,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -5404,9 +5419,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 40250.41,
       "renda_num": 1680.87,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -5430,9 +5445,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 44638.41,
       "renda_num": 1197.64,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5458,7 +5473,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7536.15,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 1,
@@ -5484,7 +5499,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4163.27,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -5534,9 +5549,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 12158.8,
       "renda_num": 1258.26,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -5562,7 +5577,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 14866.93,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -5588,7 +5603,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16141.83,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -5612,9 +5627,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 13841.92,
       "renda_num": 1366.31,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5640,7 +5655,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7719.51,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5666,7 +5681,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7057.9,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5692,7 +5707,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6468.52,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5718,7 +5733,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12850.65,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -5744,7 +5759,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3655.48,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -5794,9 +5809,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 29162.87,
       "renda_num": 1486.71,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -5822,7 +5837,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4324.34,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5874,7 +5889,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3392.83,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5900,7 +5915,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3418.36,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -5924,9 +5939,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 25286.27,
       "renda_num": 1502.37,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -5950,9 +5965,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 74183.52,
       "renda_num": 1443.05,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -5976,9 +5991,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 32267.75,
       "renda_num": 1520.89,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6002,9 +6017,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 58515.77,
       "renda_num": 1250.46,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -6028,9 +6043,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 31968.79,
       "renda_num": 1475.82,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6056,7 +6071,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3686.95,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6080,9 +6095,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 30820.65,
       "renda_num": 1652.17,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6132,9 +6147,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 39343.35,
       "renda_num": 1278.78,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6186,7 +6201,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 28406.63,
       "faixa_renda": "Classe A (Acima 12 SM)",
       "renda_level": 5,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 0,
@@ -6212,7 +6227,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4347.91,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -6236,9 +6251,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 12261.47,
       "renda_num": 1519.11,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6288,9 +6303,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 56835.24,
       "renda_num": 1198.55,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6314,9 +6329,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 45482.57,
       "renda_num": 1291.48,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6340,9 +6355,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 68445.92,
       "renda_num": 1523.86,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6368,7 +6383,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3006.51,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6418,9 +6433,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 26043.11,
       "renda_num": 1692.55,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -6444,9 +6459,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 24343.0,
       "renda_num": 1224.46,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -6472,7 +6487,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3461.88,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -6550,7 +6565,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3102.59,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -6576,7 +6591,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3757.38,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -6600,9 +6615,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 14031.76,
       "renda_num": 1642.57,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -6628,7 +6643,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3777.76,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -6678,9 +6693,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 16849.11,
       "renda_num": 1606.27,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6704,9 +6719,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 56978.46,
       "renda_num": 1248.15,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -6756,9 +6771,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 107046.9,
       "renda_num": 1564.18,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -6784,7 +6799,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8899.07,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -6808,9 +6823,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 30476.67,
       "renda_num": 1745.97,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -6860,9 +6875,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 33052.25,
       "renda_num": 1226.11,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6912,9 +6927,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 27642.02,
       "renda_num": 1718.28,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6938,9 +6953,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 40386.25,
       "renda_num": 1460.42,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -6964,9 +6979,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 13648.17,
       "renda_num": 1563.86,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -6990,9 +7005,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 59498.66,
       "renda_num": 1506.3,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7042,9 +7057,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 29116.01,
       "renda_num": 1580.04,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -7070,7 +7085,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3451.81,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -7096,7 +7111,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3509.74,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7146,9 +7161,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 41869.51,
       "renda_num": 1302.66,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -7174,7 +7189,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8664.86,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -7200,7 +7215,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3958.03,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -7224,9 +7239,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 50235.31,
       "renda_num": 1591.75,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7252,7 +7267,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3816.52,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7304,7 +7319,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7580.38,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -7328,9 +7343,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 20025.35,
       "renda_num": 1636.85,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7408,7 +7423,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8486.81,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7434,7 +7449,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6764.12,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -7486,7 +7501,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3743.38,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7510,9 +7525,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 29639.24,
       "renda_num": 1386.76,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7536,9 +7551,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29651.31,
       "renda_num": 1717.69,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -7564,7 +7579,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7999.52,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7616,7 +7631,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7603.34,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -7666,9 +7681,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 88217.73,
       "renda_num": 1565.75,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7694,7 +7709,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4135.13,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7746,7 +7761,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 13059.12,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -7772,7 +7787,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3035.76,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7796,9 +7811,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 36534.97,
       "renda_num": 1279.77,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7822,9 +7837,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 92543.39,
       "renda_num": 1447.98,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7848,9 +7863,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 89720.46,
       "renda_num": 1383.73,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -7876,7 +7891,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8135.46,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -7926,9 +7941,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 27175.25,
       "renda_num": 1400.28,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -7954,7 +7969,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12484.48,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 0,
@@ -7978,9 +7993,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 63730.74,
       "renda_num": 1405.86,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8006,7 +8021,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7967.25,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8030,9 +8045,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 69876.29,
       "renda_num": 1312.81,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -8058,7 +8073,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3605.82,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8084,7 +8099,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7020.01,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -8108,9 +8123,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 37106.47,
       "renda_num": 1342.24,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -8136,7 +8151,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8188.84,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -8188,7 +8203,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7769.55,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -8212,9 +8227,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 60439.36,
       "renda_num": 1338.15,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -8266,7 +8281,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4083.3,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -8292,7 +8307,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7477.97,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -8318,7 +8333,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16413.69,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 1,
@@ -8344,7 +8359,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8039.42,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -8370,7 +8385,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6675.72,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -8422,7 +8437,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16095.62,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -8446,9 +8461,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 9746.37,
       "renda_num": 1385.71,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -8472,9 +8487,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 18760.86,
       "renda_num": 1736.6,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8498,7 +8513,7 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 38162.07,
       "renda_num": 1354.3,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -8524,9 +8539,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 61997.35,
       "renda_num": 1550.57,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -8550,9 +8565,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 66445.48,
       "renda_num": 1741.53,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8604,7 +8619,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16421.28,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -8654,9 +8669,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 14153.74,
       "renda_num": 1476.67,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8682,7 +8697,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3929.57,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8708,7 +8723,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4066.75,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -8734,7 +8749,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3523.33,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -8786,7 +8801,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3215.94,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -8812,7 +8827,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3102.74,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -8838,7 +8853,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8116.86,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -8890,7 +8905,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 22136.33,
       "faixa_renda": "Classe A (Acima 12 SM)",
       "renda_level": 5,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -8914,9 +8929,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 36876.84,
       "renda_num": 1569.23,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -8942,7 +8957,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3287.89,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -8966,9 +8981,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 72249.92,
       "renda_num": 1578.64,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -8994,7 +9009,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3657.64,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9020,7 +9035,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4241.26,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -9044,9 +9059,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 56579.69,
       "renda_num": 1736.34,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -9098,7 +9113,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3433.33,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -9124,7 +9139,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8653.69,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -9150,7 +9165,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3710.35,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9174,9 +9189,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 48371.93,
       "renda_num": 1218.01,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -9200,7 +9215,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 137194.3,
       "renda_num": 1209.64,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -9228,7 +9243,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3666.78,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -9280,7 +9295,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3537.66,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9306,7 +9321,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4158.59,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -9330,9 +9345,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 43355.21,
       "renda_num": 1691.56,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -9384,7 +9399,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3382.04,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9410,7 +9425,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4032.13,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -9436,7 +9451,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3042.15,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -9460,9 +9475,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 37596.31,
       "renda_num": 1349.76,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9514,7 +9529,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16167.6,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -9538,9 +9553,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 66904.39,
       "renda_num": 1545.04,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -9566,7 +9581,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3786.46,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -9590,9 +9605,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 32715.66,
       "renda_num": 1418.4,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -9618,7 +9633,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6982.4,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -9644,7 +9659,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3463.18,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -9696,7 +9711,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4327.97,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9720,9 +9735,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 73837.15,
       "renda_num": 1501.81,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -9798,9 +9813,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 38321.13,
       "renda_num": 1554.74,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -9826,7 +9841,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4197.13,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -9850,9 +9865,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 26292.82,
       "renda_num": 1235.27,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -9878,7 +9893,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4300.19,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -9902,9 +9917,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 28365.47,
       "renda_num": 1214.09,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -10032,9 +10047,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 33486.98,
       "renda_num": 1648.73,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -10060,7 +10075,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8853.81,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -10084,9 +10099,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 38275.09,
       "renda_num": 1432.83,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -10138,7 +10153,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7304.52,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -10164,7 +10179,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 15783.41,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 0,
@@ -10214,9 +10229,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 45291.02,
       "renda_num": 1404.91,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -10242,7 +10257,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3568.02,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -10266,9 +10281,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 22619.55,
       "renda_num": 1679.58,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -10318,9 +10333,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29312.64,
       "renda_num": 1528.37,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -10372,7 +10387,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4307.21,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -10424,7 +10439,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 2981.12,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -10450,7 +10465,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4348.93,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -10476,7 +10491,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3939.08,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -10500,9 +10515,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 50009.4,
       "renda_num": 1443.44,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -10528,7 +10543,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7965.74,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -10554,7 +10569,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7898.35,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -10578,9 +10593,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 67239.22,
       "renda_num": 1413.72,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -10604,9 +10619,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 66730.86,
       "renda_num": 1670.25,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -10630,9 +10645,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 43103.43,
       "renda_num": 1415.53,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -10658,7 +10673,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7397.75,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -10684,7 +10699,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8938.7,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -10710,7 +10725,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 6739.53,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -10760,9 +10775,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29259.3,
       "renda_num": 1350.53,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -10788,7 +10803,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8411.14,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -10840,7 +10855,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 17000.21,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -10864,9 +10879,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 24317.71,
       "renda_num": 1646.28,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -10942,9 +10957,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 24311.37,
       "renda_num": 1546.18,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -10968,9 +10983,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 43288.56,
       "renda_num": 1674.21,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11022,7 +11037,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8892.36,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11046,9 +11061,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 67213.87,
       "renda_num": 1504.51,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -11072,9 +11087,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 52497.56,
       "renda_num": 1393.63,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -11124,7 +11139,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 94567.05,
       "renda_num": 1286.69,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -11152,7 +11167,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8649.39,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -11178,7 +11193,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4173.82,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -11202,9 +11217,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 57954.58,
       "renda_num": 1355.66,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11306,9 +11321,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 28402.77,
       "renda_num": 1369.63,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -11360,7 +11375,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4274.16,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11386,7 +11401,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3407.98,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -11462,9 +11477,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 62369.9,
       "renda_num": 1617.96,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11488,9 +11503,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 13191.9,
       "renda_num": 1678.9,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11514,9 +11529,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 17950.43,
       "renda_num": 1649.23,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11542,7 +11557,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3356.54,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -11644,9 +11659,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29041.67,
       "renda_num": 1570.52,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11696,9 +11711,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 25230.73,
       "renda_num": 1308.79,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11724,7 +11739,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4127.83,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -11750,7 +11765,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8179.41,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11774,9 +11789,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 19873.46,
       "renda_num": 1689.09,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11802,7 +11817,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3926.55,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -11828,7 +11843,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12989.93,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -11880,7 +11895,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7386.99,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -11904,9 +11919,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 36442.53,
       "renda_num": 1590.22,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -11932,7 +11947,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7455.35,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -11984,7 +11999,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8218.23,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12060,9 +12075,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 36869.68,
       "renda_num": 1265.17,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -12086,9 +12101,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 99365.3,
       "renda_num": 1744.16,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -12112,9 +12127,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 57178.99,
       "renda_num": 1555.83,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12140,7 +12155,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4180.58,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12166,7 +12181,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4065.75,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12190,9 +12205,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 48350.52,
       "renda_num": 1337.6,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12218,7 +12233,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3518.8,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -12270,7 +12285,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4019.99,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -12294,9 +12309,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 17561.7,
       "renda_num": 1320.8,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -12320,9 +12335,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 15772.36,
       "renda_num": 1242.79,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -12348,7 +12363,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3217.09,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12372,9 +12387,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 77373.25,
       "renda_num": 1681.14,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12400,7 +12415,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16979.86,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 0,
@@ -12426,7 +12441,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 16089.3,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12450,9 +12465,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 66182.75,
       "renda_num": 1372.22,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -12504,7 +12519,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 9241.24,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -12530,7 +12545,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3810.33,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -12556,7 +12571,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3217.95,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12608,7 +12623,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3535.98,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -12634,7 +12649,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3262.36,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12660,7 +12675,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 11961.41,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -12712,7 +12727,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3448.87,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -12738,7 +12753,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3384.26,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -12764,7 +12779,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7344.57,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -12788,9 +12803,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 22312.57,
       "renda_num": 1251.75,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -12816,7 +12831,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 27637.39,
       "faixa_renda": "Classe A (Acima 12 SM)",
       "renda_level": 5,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 5,
       "in_internet": 1,
@@ -12868,7 +12883,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 14181.08,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 4,
       "in_internet": 1,
@@ -12946,7 +12961,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4247.66,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -12970,9 +12985,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 37117.7,
       "renda_num": 1202.51,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -13024,7 +13039,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3239.04,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -13050,7 +13065,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4163.79,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -13074,9 +13089,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 39873.39,
       "renda_num": 1475.1,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -13102,7 +13117,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7456.13,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -13126,9 +13141,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 56915.09,
       "renda_num": 1578.44,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13152,9 +13167,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 29250.47,
       "renda_num": 1354.35,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13178,9 +13193,9 @@ const EMBEDDED_DATASET = {
       "region": "Norte",
       "pib_per_capita": 22688.91,
       "renda_num": 1526.73,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -13206,7 +13221,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3134.95,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13232,7 +13247,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4273.17,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13258,7 +13273,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3601.33,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13284,7 +13299,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3474.18,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13308,7 +13323,7 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 65657.46,
       "renda_num": 1595.79,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -13386,9 +13401,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 28041.16,
       "renda_num": 1660.6,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13412,9 +13427,9 @@ const EMBEDDED_DATASET = {
       "region": "Nordeste",
       "pib_per_capita": 33352.23,
       "renda_num": 1374.01,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -13438,9 +13453,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 42627.64,
       "renda_num": 1687.45,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13464,9 +13479,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 133105.04,
       "renda_num": 1437.78,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13490,9 +13505,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 67599.73,
       "renda_num": 1435.05,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13518,7 +13533,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4299.03,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -13544,7 +13559,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3091.5,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -13570,7 +13585,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3749.12,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -13596,7 +13611,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3753.56,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13620,9 +13635,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 58534.0,
       "renda_num": 1264.61,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13672,9 +13687,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 54425.69,
       "renda_num": 1208.79,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 1,
@@ -13700,7 +13715,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7724.07,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13724,9 +13739,9 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 24225.09,
       "renda_num": 1503.58,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 1,
       "in_internet": 0,
@@ -13778,7 +13793,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4352.38,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13804,7 +13819,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 7873.21,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -13828,9 +13843,9 @@ const EMBEDDED_DATASET = {
       "region": "Centro-Oeste",
       "pib_per_capita": 143804.95,
       "renda_num": 1237.42,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -13880,7 +13895,7 @@ const EMBEDDED_DATASET = {
       "region": "Sul",
       "pib_per_capita": 56660.85,
       "renda_num": 1450.19,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
       "tp_escola": "Privada",
       "is_privada": 1,
@@ -13932,9 +13947,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 51448.04,
       "renda_num": 1331.59,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -14012,7 +14027,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3158.42,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -14038,7 +14053,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8384.17,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -14064,7 +14079,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3627.67,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -14090,7 +14105,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3146.84,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -14116,7 +14131,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8584.48,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -14142,7 +14157,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 8665.14,
       "faixa_renda": "Classe C (3 a 6 SM)",
       "renda_level": 3,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 0,
@@ -14168,7 +14183,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3466.01,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -14246,7 +14261,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 12008.1,
       "faixa_renda": "Classe B (6 a 12 SM)",
       "renda_level": 4,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -14270,9 +14285,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 56964.55,
       "renda_num": 1419.04,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -14298,7 +14313,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 4126.55,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 0,
@@ -14322,9 +14337,9 @@ const EMBEDDED_DATASET = {
       "region": "Sudeste",
       "pib_per_capita": 36706.67,
       "renda_num": 1711.56,
-      "faixa_renda": "Classe E (Até 1.5 SM)",
+      "faixa_renda": "Classe E (AtÃ© 1.5 SM)",
       "renda_level": 1,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 2,
       "in_internet": 1,
@@ -14376,7 +14391,7 @@ const EMBEDDED_DATASET = {
       "renda_num": 3324.09,
       "faixa_renda": "Classe D (1.5 a 3 SM)",
       "renda_level": 2,
-      "tp_escola": "Pública",
+      "tp_escola": "PÃºblica",
       "is_privada": 0,
       "escolaridade_mae": 3,
       "in_internet": 1,
@@ -14404,8 +14419,8 @@ const EMBEDDED_DATASET = {
  */
 
 const EduData = {
-  rawDataset: typeof EMBEDDED_DATASET !== 'undefined' ? EMBEDDED_DATASET : null,
-  isLoaded: typeof EMBEDDED_DATASET !== 'undefined',
+  rawDataset: (typeof EMBEDDED_DATASET !== 'undefined' && EMBEDDED_DATASET) ? EMBEDDED_DATASET : null,
+  isLoaded: (typeof EMBEDDED_DATASET !== 'undefined' && !!EMBEDDED_DATASET),
 
   async init() {
     if (this.rawDataset && this.rawDataset.metadata) {
@@ -14467,118 +14482,164 @@ const EduData = {
 <script>
 /**
  * Fail-Safe Hybrid Chart & Visual Renderer for EduData Analytics
+ * Clean & Minimalist Palette
+ */
+
+/**
+ * Robust Chart Renderer for EduData Analytics
+ * Clean & Minimalist Theme with seamless tab support
+ */
+
+/**
+ * Robust Chart Renderer for EduData Analytics
+ * Clean & Minimalist Theme with seamless tab support
+ */
+
+/**
+ * Robust Chart Renderer for EduData Analytics
+ * Clean & Minimalist Theme with seamless tab support
  */
 
 const EduCharts = {
   instances: {},
 
+  _prepareCanvas(canvas) {
+    if (!canvas) return;
+    canvas.style.display = 'block';
+    if (canvas.parentElement) {
+      const existingFallback = canvas.parentElement.querySelector('.html-chart-fallback');
+      if (existingFallback) existingFallback.remove();
+    }
+  },
+
   renderAll() {
-    console.log('📊 Renderizando visualizações (Chart.js + HTML Fallback)...');
-    
+    console.log('📊 Renderizando visualizações EduCharts...');
+    this.renderOverviewCharts();
+    this.renderInfraCharts();
+    this.renderEconometricsCharts();
+  },
+
+  renderOverviewCharts() {
     this.renderIncomeDisparity();
     this.renderSchoolComparison();
     this.renderRegionalDisparity();
+  },
+
+  renderInfraCharts() {
     this.renderInfraImpact();
     this.renderInfraCoverage();
+  },
+
+  renderEconometricsCharts() {
     this.renderFeatureImportance();
   },
 
   renderIncomeDisparity() {
-    const ctx = document.getElementById('chartIncomeDisparity');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartIncomeDisparity');
+    if (!canvas) return;
     const data = EduData.getIncomeData() || [];
-
     if (!data || data.length === 0) return;
 
-    // Try Chart.js first
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.income) this.instances.income.destroy();
 
         const labels = data.map(d => (d.faixa_renda ? d.faixa_renda.split(' ').slice(0, 2).join(' ') : ''));
         const scoresGeral = data.map(d => d.nota_media || 0);
         const scoresMT = data.map(d => d.nota_mt || 0);
 
-        this.instances.income = new Chart(ctx, {
+        this.instances.income = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: labels,
             datasets: [
-              { label: 'Nota Geral Média', data: scoresGeral, backgroundColor: '#8b5cf6', borderRadius: 4 },
-              { label: 'Matemática (MT)', data: scoresMT, backgroundColor: '#06b6d4', borderRadius: 4 }
+              { label: 'Nota Geral Média', data: scoresGeral, backgroundColor: '#1d4ed8', borderRadius: 6 },
+              { label: 'Matemática (MT)', data: scoresMT, backgroundColor: '#0d9488', borderRadius: 6 }
             ]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' } },
-            scales: { y: { min: 400, max: 850 } }
+            plugins: {
+              legend: { position: 'top', labels: { color: '#334155', font: { family: 'Inter', weight: 500 } } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: '#64748b' } },
+              y: { min: 400, max: 850, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
+            }
           }
         });
         return;
       } catch (err) {
-        console.warn('Chart.js falhou, utilizando fallback HTML:', err);
+        console.warn('Erro ao criar Chart.js income:', err);
       }
     }
 
-    // HTML / CSS Visual Bar Fallback
-    if (container) {
-      let html = '<div class="html-chart-fallback" style="display:flex; flex-direction:column; gap:10px; height:100%; justify-content:center; padding:10px;">';
+    // Fallback HTML sem destruir o canvas
+    this._renderHtmlFallback(canvas, () => {
+      let html = '<div style="display:flex; flex-direction:column; gap:10px; height:100%; justify-content:center; padding:10px;">';
       data.forEach(d => {
         const pctGeral = Math.min(100, Math.max(10, ((d.nota_media - 400) / 400) * 100));
         html += `
-          <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem;">
-            <span style="width:110px; color:#cbd5e1; font-weight:600;">${d.faixa_renda.split(' ')[0]} ${d.faixa_renda.split(' ')[1]}</span>
-            <div style="flex:1; background:rgba(255,255,255,0.06); height:22px; border-radius:4px; overflow:hidden; position:relative;">
-              <div style="width:${pctGeral}%; background:linear-gradient(90deg, #8b5cf6, #06b6d4); height:100%; border-radius:4px;"></div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem;">
+            <span style="width:110px; color:#1e293b; font-weight:600;">${d.faixa_renda.split(' ')[0]} ${d.faixa_renda.split(' ')[1]}</span>
+            <div style="flex:1; background:#e2e8f0; height:20px; border-radius:4px; overflow:hidden;">
+              <div style="width:${pctGeral}%; background:#1d4ed8; height:100%; border-radius:4px;"></div>
             </div>
-            <strong style="color:#06b6d4; width:65px; text-align:right;">${d.nota_media} pts</strong>
+            <strong style="color:#1d4ed8; width:65px; text-align:right;">${d.nota_media} pts</strong>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
-    }
+      return html;
+    });
   },
 
   renderSchoolComparison() {
-    const ctx = document.getElementById('chartSchoolComparison');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartSchoolComparison');
+    if (!canvas) return;
     const data = EduData.getSchoolComparison() || [];
-    const pub = data.find(d => d && d.tp_escola === 'Pública') || { nota_cn: 510, nota_ch: 545, nota_lc: 538, nota_mt: 512, nota_redacao: 561 };
+    const pub = data.find(d => d && (d.tp_escola === 'Pública' || d.tp_escola.includes('blica'))) || { nota_cn: 510, nota_ch: 545, nota_lc: 538, nota_mt: 512, nota_redacao: 561 };
     const priv = data.find(d => d && d.tp_escola === 'Privada') || { nota_cn: 658, nota_ch: 680, nota_lc: 668, nota_mt: 685, nota_redacao: 727 };
 
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.school) this.instances.school.destroy();
 
         const categories = ['CN', 'CH', 'LC', 'MT', 'Redação'];
         const pubScores = [pub.nota_cn, pub.nota_ch, pub.nota_lc, pub.nota_mt, pub.nota_redacao];
         const privScores = [priv.nota_cn, priv.nota_ch, priv.nota_lc, priv.nota_mt, priv.nota_redacao];
 
-        this.instances.school = new Chart(ctx, {
+        this.instances.school = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: categories,
             datasets: [
-              { label: 'Escola Privada', data: privScores, backgroundColor: '#8b5cf6', borderRadius: 4 },
-              { label: 'Escola Pública', data: pubScores, backgroundColor: '#f43f5e', borderRadius: 4 }
+              { label: 'Escola Privada', data: privScores, backgroundColor: '#4338ca', borderRadius: 6 },
+              { label: 'Escola Pública', data: pubScores, backgroundColor: '#e11d48', borderRadius: 6 }
             ]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' } },
-            scales: { y: { min: 400, max: 800 } }
+            plugins: {
+              legend: { position: 'top', labels: { color: '#334155', font: { family: 'Inter', weight: 500 } } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: '#64748b' } },
+              y: { min: 400, max: 800, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
+            }
           }
         });
         return;
       } catch (err) {
-        console.warn('Chart.js fallback para comparativo de escolas:', err);
+        console.warn('Erro ao criar Chart.js school:', err);
       }
     }
 
-    if (container) {
+    this._renderHtmlFallback(canvas, () => {
       const items = [
         { name: 'Matemática (MT)', pub: pub.nota_mt, priv: priv.nota_mt },
         { name: 'Redação', pub: pub.nota_redacao, priv: priv.nota_redacao },
@@ -14590,166 +14651,205 @@ const EduCharts = {
       items.forEach(it => {
         html += `
           <div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
-              <span>${it.name}</span>
-              <span><strong style="color:#f43f5e">Pública: ${it.pub}</strong> vs <strong style="color:#8b5cf6">Privada: ${it.priv}</strong></span>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+              <span style="color:#334155; font-weight:500;">${it.name}</span>
+              <span><strong style="color:#e11d48">Pública: ${it.pub}</strong> vs <strong style="color:#4338ca">Privada: ${it.priv}</strong></span>
             </div>
-            <div style="display:flex; gap:4px; height:12px;">
-              <div style="width:${(it.pub/800)*100}%; background:#f43f5e; border-radius:3px;"></div>
-              <div style="width:${(it.priv/800)*100}%; background:#8b5cf6; border-radius:3px;"></div>
+            <div style="display:flex; gap:4px; height:10px;">
+              <div style="width:${(it.pub/800)*100}%; background:#e11d48; border-radius:3px;"></div>
+              <div style="width:${(it.priv/800)*100}%; background:#4338ca; border-radius:3px;"></div>
             </div>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
-    }
+      return html;
+    });
   },
 
   renderRegionalDisparity() {
-    const ctx = document.getElementById('chartRegionalDisparity');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartRegionalDisparity');
+    if (!canvas) return;
     const data = EduData.getRegionalData() || [];
 
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart && data.length > 0) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.regional) this.instances.regional.destroy();
 
         const regions = data.map(d => d.region);
         const scores = data.map(d => d.nota_media);
         const pibs = data.map(d => d.pib_medio / 1000);
 
-        this.instances.regional = new Chart(ctx, {
+        this.instances.regional = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: regions,
             datasets: [
-              { label: 'Nota Média', data: scores, backgroundColor: '#06b6d4', borderRadius: 4 },
-              { type: 'line', label: 'PIB per Capita (R$ mil)', data: pibs, borderColor: '#f59e0b', borderWidth: 2 }
+              { label: 'Nota Média', data: scores, backgroundColor: '#0d9488', borderRadius: 6, yAxisID: 'y' },
+              { type: 'line', label: 'PIB per Capita (R$ mil)', data: pibs, borderColor: '#d97706', backgroundColor: '#d97706', borderWidth: 2.5, tension: 0.2, yAxisID: 'y1' }
             ]
           },
-          options: { responsive: true, maintainAspectRatio: false }
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { color: '#334155', font: { family: 'Inter', weight: 500 } } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: '#64748b' } },
+              y: { type: 'linear', position: 'left', min: 450, max: 600, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
+              y1: { type: 'linear', position: 'right', grid: { display: false }, ticks: { color: '#d97706' } }
+            }
+          }
         });
         return;
       } catch (err) {
-        console.warn('Regional chart fallback:', err);
+        console.warn('Erro ao criar Chart.js regional:', err);
       }
     }
 
-    if (container) {
+    this._renderHtmlFallback(canvas, () => {
       let html = '<div style="display:flex; flex-direction:column; gap:10px; padding:10px;">';
       data.forEach(d => {
         html += `
-          <div style="display:flex; align-items:center; gap:12px; font-size:0.8rem;">
-            <span style="width:90px; color:#fff; font-weight:600;">${d.region}</span>
-            <div style="flex:1; background:rgba(255,255,255,0.06); height:20px; border-radius:4px;">
-              <div style="width:${((d.nota_media-450)/200)*100}%; background:#06b6d4; height:100%; border-radius:4px;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:0.85rem;">
+            <span style="width:90px; color:#0f172a; font-weight:600;">${d.region}</span>
+            <div style="flex:1; background:#e2e8f0; height:18px; border-radius:4px; overflow:hidden;">
+              <div style="width:${((d.nota_media-450)/200)*100}%; background:#0d9488; height:100%; border-radius:4px;"></div>
             </div>
-            <span style="color:#06b6d4; font-weight:700;">${d.nota_media} pts</span>
-            <span style="color:#f59e0b; font-size:0.75rem;">(R$ ${(d.pib_medio/1000).toFixed(1)}k PIB)</span>
+            <span style="color:#0d9488; font-weight:700;">${d.nota_media} pts</span>
+            <span style="color:#d97706; font-size:0.75rem; font-weight:600;">(R$ ${(d.pib_medio/1000).toFixed(1)}k PIB)</span>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
-    }
+      return html;
+    });
   },
 
   renderInfraImpact() {
-    const ctx = document.getElementById('chartInfraImpact');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartInfraImpact');
+    if (!canvas) return;
     const data = EduData.getInfraImpact() || [];
 
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart && data.length > 0) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.infraImpact) this.instances.infraImpact.destroy();
 
-        this.instances.infraImpact = new Chart(ctx, {
+        this.instances.infraImpact = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: data.map(d => d.item),
-            datasets: [{ label: 'Ganho (Pontos)', data: data.map(d => d.diferenca_pontos), backgroundColor: '#10b981', borderRadius: 4 }]
+            datasets: [{ label: 'Ganho na Nota (Pontos)', data: data.map(d => d.diferenca_pontos), backgroundColor: '#16a34a', borderRadius: 6 }]
           },
-          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false }
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
+              y: { grid: { display: false }, ticks: { color: '#334155' } }
+            }
+          }
         });
         return;
-      } catch (err) {}
+      } catch (err) {
+        console.warn('Erro ao criar Chart.js infraImpact:', err);
+      }
     }
 
-    if (container) {
+    this._renderHtmlFallback(canvas, () => {
       let html = '<div style="display:flex; flex-direction:column; gap:10px; padding:10px;">';
       data.forEach(d => {
         html += `
-          <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem;">
-            <span style="width:180px; color:#cbd5e1;">${d.item}</span>
-            <div style="flex:1; background:rgba(255,255,255,0.06); height:20px; border-radius:4px;">
-              <div style="width:${(d.diferenca_pontos/60)*100}%; background:#10b981; height:100%; border-radius:4px;"></div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem;">
+            <span style="width:180px; color:#334155; font-weight:500;">${d.item}</span>
+            <div style="flex:1; background:#e2e8f0; height:18px; border-radius:4px; overflow:hidden;">
+              <div style="width:${(d.diferenca_pontos/60)*100}%; background:#16a34a; height:100%; border-radius:4px;"></div>
             </div>
-            <strong style="color:#10b981; width:70px; text-align:right;">+${d.diferenca_pontos} pts</strong>
+            <strong style="color:#16a34a; width:70px; text-align:right;">+${d.diferenca_pontos} pts</strong>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
-    }
+      return html;
+    });
   },
 
   renderInfraCoverage() {
-    const ctx = document.getElementById('chartInfraCoverage');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartInfraCoverage');
+    if (!canvas) return;
     const data = EduData.getSchoolComparison() || [];
-    const pub = data.find(d => d && d.tp_escola === 'Pública') || {};
+    const pub = data.find(d => d && (d.tp_escola === 'Pública' || d.tp_escola.includes('blica'))) || {};
 
     const items = [
-      { name: 'Internet Banda Larga', pub: pub.pct_internet || 65.2, priv: 98.1 },
-      { name: 'Lab de Ciências', pub: pub.pct_lab || 35.4, priv: 92.3 },
+      { name: 'Internet Banda Larga', pub: pub.pct_internet || 68.7, priv: 97.7 },
+      { name: 'Lab de Ciências', pub: pub.pct_lab || 39.1, priv: 92.2 },
       { name: 'Biblioteca', pub: 55.0, priv: 95.0 },
       { name: 'Salas de Computação', pub: 50.1, priv: 96.4 }
     ];
 
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.infraCoverage) this.instances.infraCoverage.destroy();
 
-        this.instances.infraCoverage = new Chart(ctx, {
+        this.instances.infraCoverage = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: items.map(i => i.name),
             datasets: [
-              { label: 'Rede Pública', data: items.map(i => i.pub), backgroundColor: '#f43f5e', borderRadius: 4 },
-              { label: 'Rede Privada', data: items.map(i => i.priv), backgroundColor: '#8b5cf6', borderRadius: 4 }
+              { label: 'Rede Pública (%)', data: items.map(i => i.pub), backgroundColor: '#e11d48', borderRadius: 6 },
+              { label: 'Rede Privada (%)', data: items.map(i => i.priv), backgroundColor: '#4338ca', borderRadius: 6 }
             ]
           },
-          options: { responsive: true, maintainAspectRatio: false }
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { color: '#334155', font: { family: 'Inter', weight: 500 } } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: '#64748b' } },
+              y: { min: 0, max: 100, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
+            }
+          }
         });
         return;
-      } catch (err) {}
+      } catch (err) {
+        console.warn('Erro ao criar Chart.js infraCoverage:', err);
+      }
     }
 
-    if (container) {
+    this._renderHtmlFallback(canvas, () => {
       let html = '<div style="display:flex; flex-direction:column; gap:12px; padding:10px;">';
       items.forEach(it => {
         html += `
           <div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
-              <span>${it.name}</span>
-              <span><strong style="color:#f43f5e">Pública: ${it.pub}%</strong> vs <strong style="color:#8b5cf6">Privada: ${it.priv}%</strong></span>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+              <span style="color:#334155; font-weight:500;">${it.name}</span>
+              <span><strong style="color:#e11d48">Pública: ${it.pub}%</strong> vs <strong style="color:#4338ca">Privada: ${it.priv}%</strong></span>
             </div>
-            <div style="display:flex; gap:4px; height:12px;">
-              <div style="width:${it.pub}%; background:#f43f5e; border-radius:3px;"></div>
-              <div style="width:${it.priv}%; background:#8b5cf6; border-radius:3px;"></div>
+            <div style="display:flex; gap:4px; height:10px;">
+              <div style="width:${it.pub}%; background:#e11d48; border-radius:3px;"></div>
+              <div style="width:${it.priv}%; background:#4338ca; border-radius:3px;"></div>
             </div>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
-    }
+      return html;
+    });
   },
 
   renderFeatureImportance() {
-    const ctx = document.getElementById('chartFeatureImportance');
-    const container = ctx ? ctx.parentElement : null;
+    const canvas = document.getElementById('chartFeatureImportance');
+    if (!canvas) return;
     const raw = EduData.getFeatureImportance() || {};
 
     const labelMap = {
@@ -14764,38 +14864,76 @@ const EduCharts = {
 
     const items = Object.entries(raw).map(([k, v]) => ({ name: labelMap[k] || k, val: (v * 100).toFixed(1) }));
 
-    if (window.Chart && ctx && ctx.getContext && ctx.getContext('2d')) {
+    if (window.Chart && items.length > 0) {
       try {
+        this._prepareCanvas(canvas);
         if (this.instances.featureImp) this.instances.featureImp.destroy();
 
-        this.instances.featureImp = new Chart(ctx, {
+        this.instances.featureImp = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: items.map(i => i.name),
-            datasets: [{ label: 'Importância (%)', data: items.map(i => i.val), backgroundColor: '#8b5cf6', borderRadius: 4 }]
+            datasets: [{ label: 'Importância (%)', data: items.map(i => i.val), backgroundColor: '#1d4ed8', borderRadius: 6 }]
           },
-          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false }
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
+              y: { grid: { display: false }, ticks: { color: '#334155' } }
+            }
+          }
         });
         return;
-      } catch (err) {}
+      } catch (err) {
+        console.warn('Erro ao criar Chart.js featureImp:', err);
+      }
     }
 
-    if (container) {
+    this._renderHtmlFallback(canvas, () => {
       let html = '<div style="display:flex; flex-direction:column; gap:10px; padding:10px;">';
       items.forEach(it => {
         html += `
-          <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem;">
-            <span style="width:160px; color:#cbd5e1;">${it.name}</span>
-            <div style="flex:1; background:rgba(255,255,255,0.06); height:20px; border-radius:4px;">
-              <div style="width:${it.val}%; background:#8b5cf6; height:100%; border-radius:4px;"></div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem;">
+            <span style="width:160px; color:#334155; font-weight:500;">${it.name}</span>
+            <div style="flex:1; background:#e2e8f0; height:18px; border-radius:4px; overflow:hidden;">
+              <div style="width:${it.val}%; background:#1d4ed8; height:100%; border-radius:4px;"></div>
             </div>
-            <strong style="color:#8b5cf6; width:45px; text-align:right;">${it.val}%</strong>
+            <strong style="color:#1d4ed8; width:45px; text-align:right;">${it.val}%</strong>
           </div>
         `;
       });
       html += '</div>';
-      container.innerHTML = html;
+      return html;
+    });
+  },
+
+  // Helper para exibir fallback visual SEM destruir a tag <canvas>
+  _renderHtmlFallback(canvas, htmlGenerator) {
+    if (!canvas || !canvas.parentElement) return;
+    const parent = canvas.parentElement;
+    canvas.style.display = 'none';
+
+    let fallback = parent.querySelector('.html-chart-fallback');
+    if (!fallback) {
+      fallback = document.createElement('div');
+      fallback.className = 'html-chart-fallback';
+      fallback.style.height = '100%';
+      fallback.style.width = '100%';
+      parent.appendChild(fallback);
     }
+    fallback.innerHTML = htmlGenerator();
+  },
+
+  // Força o redimensionamento dos gráficos visíveis
+  resizeAll() {
+    Object.values(this.instances).forEach(chart => {
+      if (chart && typeof chart.resize === 'function') {
+        try { chart.resize(); } catch(e) {}
+      }
+    });
   }
 };
 
@@ -14803,6 +14941,7 @@ const EduCharts = {
 <script>
 /**
  * Econometrics & Statistical Tables module for EduData Analytics
+ * Clean & Minimalist Style
  */
 
 const EduEconometrics = {
@@ -14878,11 +15017,11 @@ const EduEconometrics = {
       keys.forEach(colKey => {
         const val = matrix[rowKey][colKey];
         const valNum = parseFloat(val);
-        const bgAlpha = Math.abs(valNum);
-        let color = valNum > 0 ? `rgba(139, 92, 246, ${bgAlpha * 0.5})` : `rgba(244, 63, 94, ${bgAlpha * 0.5})`;
-        if (rowKey === colKey) color = 'rgba(255, 255, 255, 0.08)';
+        const bgAlpha = Math.min(0.85, Math.abs(valNum));
+        let color = valNum > 0 ? `rgba(37, 99, 235, ${bgAlpha * 0.35})` : `rgba(225, 29, 72, ${bgAlpha * 0.35})`;
+        if (rowKey === colKey) color = 'rgba(241, 245, 249, 1)';
 
-        bodyHtml += `<td class="heatmap-cell" style="background-color: ${color}">${valNum.toFixed(3)}</td>`;
+        bodyHtml += `<td class="heatmap-cell" style="background-color: ${color}; color: #0f172a;">${valNum.toFixed(3)}</td>`;
       });
       bodyHtml += '</tr>';
     });
@@ -14904,7 +15043,7 @@ const EduEconometrics = {
           <td><strong>${item.item}</strong></td>
           <td><span class="pulse-dot"></span> Disponível</td>
           <td><strong style="color: var(--accent-emerald)">${item.com_item} pts</strong></td>
-          <td><span style="color: var(--text-dim)">${item.sem_item} pts</span></td>
+          <td><span style="color: var(--text-muted)">${item.sem_item} pts</span></td>
           <td><span class="badge badge-info">+${item.diferenca_pontos} pts</span></td>
           <td><code>p < 0.0001 (Significativo)</code></td>
         </tr>
@@ -14919,6 +15058,22 @@ const EduEconometrics = {
 <script>
 /**
  * Policy Impact Simulator Module for EduData Analytics
+ * Clean & Minimalist Style
+ */
+
+/**
+ * Policy Impact Simulator Module for EduData Analytics
+ * Clean & Minimalist Style
+ */
+
+/**
+ * Policy Impact Simulator Module for EduData Analytics
+ * Clean & Minimalist Style
+ */
+
+/**
+ * Policy Impact Simulator Module for EduData Analytics
+ * Clean & Minimalist Style
  */
 
 const EduSimulator = {
@@ -14985,14 +15140,12 @@ const EduSimulator = {
     const deltaBiblio = (biblioVal - baseBiblio) / 100;
     const deltaPcs = (pcsVal - basePcs) / 100;
 
-    // Weight parameters based on OLS / Infra Score weights
-    // Infra score = 25*internet + 25*lab + 20*biblio + 15*pcs + 15*quadra
-    // OLS score_infra beta ~ 0.748
+    // Weights
     const betaInfra = 0.748;
     const deltaInfraScore = (deltaInternet * 25) + (deltaLab * 25) + (deltaBiblio * 20) + (deltaPcs * 15);
     const gainInfra = deltaInfraScore * betaInfra;
 
-    // Renda Log Impact (beta ~ 30.088 * ln(1 + pct))
+    // Renda Log Impact
     const betaIncomeLog = 30.088;
     const gainIncome = incomeIncPct > 0 ? betaIncomeLog * Math.log(1 + (incomeIncPct / 100)) : 0;
 
@@ -15028,13 +15181,11 @@ const EduSimulator = {
           label: 'Nota Média Estimada',
           data: [basePub.toFixed(1), projPub.toFixed(1), priv.toFixed(1)],
           backgroundColor: [
-            'rgba(244, 63, 94, 0.85)',
-            'rgba(16, 185, 129, 0.85)',
-            'rgba(139, 92, 246, 0.85)'
+            '#e11d48',
+            '#16a34a',
+            '#4338ca'
           ],
-          borderColor: ['#f43f5e', '#10b981', '#8b5cf6'],
-          borderWidth: 1,
-          borderRadius: 8
+          borderRadius: 6
         }]
       },
       options: {
@@ -15044,9 +15195,10 @@ const EduSimulator = {
           legend: { display: false }
         },
         scales: {
-          x: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+          x: { grid: { display: false }, ticks: { color: '#64748b' } },
           y: { 
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            grid: { color: '#e2e8f0' },
+            ticks: { color: '#64748b' },
             min: 450,
             max: 750
           }
@@ -15058,6 +15210,18 @@ const EduSimulator = {
 
 </script>
 <script>
+/**
+ * Master Application Controller for EduData Analytics
+ */
+
+/**
+ * Master Application Controller for EduData Analytics
+ */
+
+/**
+ * Master Application Controller for EduData Analytics
+ */
+
 /**
  * Master Application Controller for EduData Analytics
  */
@@ -15092,6 +15256,11 @@ const App = {
 
     // 5. Initial Data Explorer population
     this.initDataExplorer();
+
+    // 6. Create Icons
+    if (window.lucide && window.lucide.createIcons) {
+      window.lucide.createIcons();
+    }
   },
 
   renderKPIs() {
@@ -15133,16 +15302,31 @@ const App = {
         const targetPanel = document.getElementById(targetId);
         if (targetPanel) targetPanel.classList.add('active');
 
-        // Force render visual charts and econometric tables when tab switches
-        setTimeout(() => {
-          if (window.EduCharts) EduCharts.renderAll();
-          if (window.EduEconometrics) {
-            EduEconometrics.renderOLS();
-            EduEconometrics.renderCorrelationMatrix();
-            EduEconometrics.renderInfraSummaryTable();
-          }
-          if (window.EduSimulator) EduSimulator.calculateImpact();
-        }, 30);
+        // Renderizar ou redimensionar elementos da aba selecionada
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            if (targetId === 'tab-overview' && window.EduCharts) {
+              EduCharts.renderOverviewCharts();
+            } else if (targetId === 'tab-infrastructure') {
+              if (window.EduCharts) EduCharts.renderInfraCharts();
+              if (window.EduEconometrics) EduEconometrics.renderInfraSummaryTable();
+            } else if (targetId === 'tab-econometrics') {
+              if (window.EduEconometrics) {
+                EduEconometrics.renderOLS();
+                EduEconometrics.renderCorrelationMatrix();
+              }
+              if (window.EduCharts) EduCharts.renderEconometricsCharts();
+            } else if (targetId === 'tab-simulator') {
+              if (window.EduSimulator) EduSimulator.calculateImpact();
+            } else if (targetId === 'tab-explorer') {
+              App.renderExplorerTable();
+            }
+
+            if (window.EduCharts && EduCharts.resizeAll) {
+              EduCharts.resizeAll();
+            }
+          }, 50);
+        });
       });
     });
   },
@@ -15312,26 +15496,20 @@ const App = {
   }
 };
 
-// Initialize Application
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => App.init());
-} else {
+// Initialize Application safely
+function startApp() {
+  if (window._appInitialized) return;
+  window._appInitialized = true;
   App.init();
 }
 
-</script>
-<script>
-window.addEventListener('load', () => {
-    if (window.EduData) EduData.init();
-    if (window.EduCharts) EduCharts.renderAll();
-    if (window.EduEconometrics) {
-        EduEconometrics.renderOLS();
-        EduEconometrics.renderCorrelationMatrix();
-        EduEconometrics.renderInfraSummaryTable();
-    }
-    if (window.EduSimulator) EduSimulator.init();
-    if (window.lucide) lucide.createIcons();
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}
+window.addEventListener('load', startApp);
+
 </script>
 </body>
 </html>

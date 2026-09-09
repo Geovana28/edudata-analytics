@@ -3,24 +3,37 @@
  */
 
 const EduData = {
-  rawDataset: typeof EMBEDDED_DATASET !== 'undefined' ? EMBEDDED_DATASET : null,
-  isLoaded: typeof EMBEDDED_DATASET !== 'undefined',
+  rawDataset: (typeof EMBEDDED_DATASET !== 'undefined' && EMBEDDED_DATASET) ? EMBEDDED_DATASET : null,
+  isLoaded: (typeof EMBEDDED_DATASET !== 'undefined' && !!EMBEDDED_DATASET),
 
   async init() {
-    if (this.rawDataset && this.rawDataset.metadata) {
+    if (this.rawDataset && this.rawDataset.metadata && this.rawDataset.aggregations) {
       console.log('✅ Dataset ENEM x IBGE pré-carregado em memória!');
+      this.isLoaded = true;
+      return;
+    }
+
+    if (typeof EMBEDDED_DATASET !== 'undefined' && EMBEDDED_DATASET) {
+      this.rawDataset = EMBEDDED_DATASET;
+      this.isLoaded = true;
+      console.log('✅ Dataset inicializado a partir de EMBEDDED_DATASET.');
       return;
     }
 
     try {
       const response = await fetch('data/enem_ibge_dataset.json');
-      if (!response.ok) throw new Error('Data file not found via HTTP');
-      this.rawDataset = await response.json();
-      this.isLoaded = true;
-      console.log('✅ Dataset ENEM x IBGE carregado com sucesso via HTTP!', this.rawDataset);
+      if (response && response.ok) {
+        this.rawDataset = await response.json();
+        this.isLoaded = true;
+        console.log('✅ Dataset ENEM x IBGE carregado com sucesso via HTTP!');
+        return;
+      }
     } catch (err) {
-      console.warn('⚠️ Utilizando dataset compilado estático de fallback.', err);
-      this.rawDataset = typeof EMBEDDED_DATASET !== 'undefined' ? EMBEDDED_DATASET : this.getFallbackDataset();
+      console.warn('⚠️ Fetch local desabilitado (modo offline/file://). Usando fallback embutido.', err);
+    }
+
+    if (typeof EMBEDDED_DATASET !== 'undefined') {
+      this.rawDataset = EMBEDDED_DATASET;
       this.isLoaded = true;
     }
   },

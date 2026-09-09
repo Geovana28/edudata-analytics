@@ -1,52 +1,70 @@
-# 📊 EduData Analytics: Educational Inequality & Socioeconomic Analytics (ENEM x IBGE)
+# 📊 EduData Analytics — Desigualdade Educacional & Socioeconômica
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![HTML5 / Vanilla JS](https://img.shields.io/badge/Frontend-Vanilla%20JS%20%7C%20CSS3%20%7C%20HTML5-blue.svg)](https://developer.mozilla.org/)
-[![Chart.js](https://img.shields.io/badge/Visualizations-Chart.js-orange.svg)](https://www.chartjs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-FF6384?logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
+[![HTML5](https://img.shields.io/badge/HTML5-Semântico-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Glassmorphism-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![Licença MIT](https://img.shields.io/badge/Licença-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Painel Interativo de Econometria e Ciência de Dados Aplicada a Políticas Públicas Educacionais.**  
-> Análise aprofundada da disparidade socioeconômica no desempenho do ENEM integrada a indicadores demográficos e educacionais do IBGE.
-
----
-
-## 📌 Visão Geral
-
-O **EduData Analytics** é uma plataforma analítica desenvolvida para explorar, quantificar e visualizar as disparidades no desempenho escolar de estudantes brasileiros. Utilizando microdados do ENEM e cruzamentos com dados do IBGE, o projeto aplica métricas econométricas clássicas e visualizações interativas de alta densidade informativa.
+> **Painel Interativo de Econometria e Ciência de Dados Aplicada a Políticas Públicas Educacionais.**
+> Análise da disparidade socioeconômica no desempenho do ENEM integrada a indicadores demográficos e educacionais do IBGE.
 
 ---
 
-## 🔬 Principais Métricas e Recursos
+## 🖥️ Preview
 
-- **Índice de Gini Educacional:** Cálculo da concentração e desigualdade na distribuição de notas do exame nacional.
-- **Análise de Disparidade (Gap de Desempenho):** Comparativo direto entre alunos da rede pública vs. privada e impacto de renda familiar per capita.
-- **Matriz de Correlação Multivariada:** Relação entre escolaridade dos pais, acesso à tecnologia, infraestrutura domiciliar e nota final.
-- **Simulador Interativo de Políticas Públicas:** Projeção de impacto hipotético de intervenções educacionais e bolsas de permanência.
-- **Exportação de Dados:** Download de relatórios e dados sumarizados em formato `.csv`.
+O dashboard apresenta um design **dark mode premium** com glassmorphism, gráficos interativos e animações suaves.
+
+### Funcionalidades Principais
+
+| Módulo | Descrição |
+|--------|-----------|
+| 📈 **Panorama & Disparidade** | Gráficos de desempenho por renda, escola (pública vs privada) e região |
+| 🏫 **Infraestrutura Escolar** | Impacto de cada recurso educacional + comparativo de cobertura |
+| 🧠 **Econometria & ML** | Regressão OLS, Random Forest Feature Importance, Matriz de Correlação |
+| 🎛️ **Simulador de Políticas** | 5 sliders interativos com projeção econométrica em tempo real |
+| 📋 **Data Explorer** | Tabela paginada com filtros por UF, escola e renda + exportação CSV |
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🔬 Métricas Científicas
 
-- **Frontend Core:** HTML5 Semântico, Vanilla JavaScript (ES6+), CSS3 Moderno (Glassmorphism, Dark Theme, Design Responsivo).
-- **Bibliotecas de Visualização:** [Chart.js](https://www.chartjs.org/) com personalização de tooltips, gradientes e animações.
-- **Ícones & Tipografia:** [Lucide Icons](https://lucide.dev/), Google Fonts (Inter & Outfit).
-- **Zero Dependências Pesadas:** Funciona diretamente no navegador sem necessidade de build complexo.
+- **Índice de Gini Educacional:** `0.0858` — concentração na distribuição de notas
+- **Gap Público-Privado:** `+140.3 pts` — disparidade média nacional
+- **OLS R² Ajustado:** `76.16%` — variância explicada pelo modelo econométrico
+- **5 variáveis explicativas:** ln(Renda), ln(PIB), Escola Privada, Infraestrutura, Escolaridade Mãe
+
+### Modelo OLS (Ordinary Least Squares)
+
+$$\text{Nota}_{ENEM} = 63.8 + 30.1 \cdot \ln(\text{Renda}) + 15.0 \cdot \ln(\text{PIB}) + 73.0 \cdot \text{Privada} + 0.75 \cdot \text{Infra} + 12.6 \cdot \text{EscMãe}$$
+
+Todos os coeficientes são estatisticamente significativos ($p < 0.001$).
+
+---
+
+## 🛠️ Tecnologias
+
+| Categoria | Stack |
+|-----------|-------|
+| **Frontend** | HTML5 Semântico, Vanilla JavaScript (ES6+), CSS3 (Dark Glassmorphism) |
+| **Gráficos** | [Chart.js 4.4](https://www.chartjs.org/) via CDN |
+| **Ícones** | [Lucide Icons](https://lucide.dev/) via CDN |
+| **Tipografia** | Google Fonts (Inter & Outfit) |
+| **Arquitetura** | Single-file auto-contido — zero dependências locais |
 
 ---
 
 ## 🚀 Como Executar
 
-### Opção 1: Abrir diretamente no Navegador
-Basta abrir o arquivo `index.html` ou `dashboard_standalone.html` no seu navegador de preferência (Google Chrome, Firefox, Edge).
+### Abrir direto no navegador (recomendado)
 
-### Opção 2: Servidor Local (Live Server / Python)
-Para melhor experiência com carregamento de módulos locais:
+Basta dar **dois cliques** no arquivo `index.html`. Funciona 100% via `file://` — sem necessidade de servidor.
 
 ```bash
-# Usando Python 3
+# Ou via servidor local (opcional)
 python -m http.server 8000
+# Acesse http://localhost:8000
 ```
-Acesse `http://localhost:8000` no seu navegador.
 
 ---
 
@@ -54,20 +72,30 @@ Acesse `http://localhost:8000` no seu navegador.
 
 ```text
 educacao/
-├── css/
-│   └── styles.css               # Folhas de estilo e variáveis de tema
-├── js/
-│   ├── app.js                   # Lógica de manipulação do DOM e filtros
-│   ├── charts.js                # Configuração e renderização dos gráficos
-│   └── data.js                  # Estruturas e datasets processados
-├── data/                        # Bases de dados e microdados processados
-├── index.html                   # Painel principal modular
-├── dashboard_standalone.html    # Versão standalone autocontida
-└── README.md                    # Documentação do projeto
+├── index.html               # Dashboard completo (single-file, ~50KB)
+├── README.md                # Esta documentação
+├── data/
+│   └── enem_ibge_dataset.json   # Dataset original (backup)
+└── js/                      # Arquivos legados (v1 — não necessários)
+```
+
+> **Nota:** A versão atual é o `index.html` auto-contido. Os arquivos na pasta `js/` e `css/` são da versão anterior e podem ser removidos.
+
+---
+
+## 🎓 Citação (BibTeX)
+
+```bibtex
+@misc{edudata_analytics_2026,
+  title   = {EduData Analytics: Educational Inequality \& Socioeconomic Dashboard},
+  author  = {Geovana Luiza Morais Moreira},
+  year    = {2026},
+  url     = {https://github.com/Geovana28/edudata-analytics}
+}
 ```
 
 ---
 
-## 📄 Licença
+## ⚖️ Licença
 
 Distribuído sob a licença MIT. Veja `LICENSE` para mais detalhes.

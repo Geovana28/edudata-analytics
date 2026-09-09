@@ -1,5 +1,6 @@
 /**
  * Policy Impact Simulator Module for EduData Analytics
+ * Clean & Minimalist Style
  */
 
 const EduSimulator = {
@@ -66,14 +67,12 @@ const EduSimulator = {
     const deltaBiblio = (biblioVal - baseBiblio) / 100;
     const deltaPcs = (pcsVal - basePcs) / 100;
 
-    // Weight parameters based on OLS / Infra Score weights
-    // Infra score = 25*internet + 25*lab + 20*biblio + 15*pcs + 15*quadra
-    // OLS score_infra beta ~ 0.748
+    // Weights
     const betaInfra = 0.748;
     const deltaInfraScore = (deltaInternet * 25) + (deltaLab * 25) + (deltaBiblio * 20) + (deltaPcs * 15);
     const gainInfra = deltaInfraScore * betaInfra;
 
-    // Renda Log Impact (beta ~ 30.088 * ln(1 + pct))
+    // Renda Log Impact
     const betaIncomeLog = 30.088;
     const gainIncome = incomeIncPct > 0 ? betaIncomeLog * Math.log(1 + (incomeIncPct / 100)) : 0;
 
@@ -109,13 +108,11 @@ const EduSimulator = {
           label: 'Nota Média Estimada',
           data: [basePub.toFixed(1), projPub.toFixed(1), priv.toFixed(1)],
           backgroundColor: [
-            'rgba(244, 63, 94, 0.85)',
-            'rgba(16, 185, 129, 0.85)',
-            'rgba(139, 92, 246, 0.85)'
+            '#e11d48',
+            '#16a34a',
+            '#4338ca'
           ],
-          borderColor: ['#f43f5e', '#10b981', '#8b5cf6'],
-          borderWidth: 1,
-          borderRadius: 8
+          borderRadius: 6
         }]
       },
       options: {
@@ -125,9 +122,10 @@ const EduSimulator = {
           legend: { display: false }
         },
         scales: {
-          x: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+          x: { grid: { display: false }, ticks: { color: '#64748b' } },
           y: { 
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            grid: { color: '#e2e8f0' },
+            ticks: { color: '#64748b' },
             min: 450,
             max: 750
           }

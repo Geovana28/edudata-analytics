@@ -1,5 +1,6 @@
 /**
  * Econometrics & Statistical Tables module for EduData Analytics
+ * Clean & Minimalist Style
  */
 
 const EduEconometrics = {
@@ -75,11 +76,11 @@ const EduEconometrics = {
       keys.forEach(colKey => {
         const val = matrix[rowKey][colKey];
         const valNum = parseFloat(val);
-        const bgAlpha = Math.abs(valNum);
-        let color = valNum > 0 ? `rgba(139, 92, 246, ${bgAlpha * 0.5})` : `rgba(244, 63, 94, ${bgAlpha * 0.5})`;
-        if (rowKey === colKey) color = 'rgba(255, 255, 255, 0.08)';
+        const bgAlpha = Math.min(0.85, Math.abs(valNum));
+        let color = valNum > 0 ? `rgba(37, 99, 235, ${bgAlpha * 0.35})` : `rgba(225, 29, 72, ${bgAlpha * 0.35})`;
+        if (rowKey === colKey) color = 'rgba(241, 245, 249, 1)';
 
-        bodyHtml += `<td class="heatmap-cell" style="background-color: ${color}">${valNum.toFixed(3)}</td>`;
+        bodyHtml += `<td class="heatmap-cell" style="background-color: ${color}; color: #0f172a;">${valNum.toFixed(3)}</td>`;
       });
       bodyHtml += '</tr>';
     });
@@ -101,7 +102,7 @@ const EduEconometrics = {
           <td><strong>${item.item}</strong></td>
           <td><span class="pulse-dot"></span> Disponível</td>
           <td><strong style="color: var(--accent-emerald)">${item.com_item} pts</strong></td>
-          <td><span style="color: var(--text-dim)">${item.sem_item} pts</span></td>
+          <td><span style="color: var(--text-muted)">${item.sem_item} pts</span></td>
           <td><span class="badge badge-info">+${item.diferenca_pontos} pts</span></td>
           <td><code>p < 0.0001 (Significativo)</code></td>
         </tr>
