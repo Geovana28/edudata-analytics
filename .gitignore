@@ -11,3 +11,11 @@ build/
 
 # Temporary logs
 *.log
+
+__pycache__/
+*.pyc
+.pytest_cache/
+*.db
+*.sqlite3
+.env
+
