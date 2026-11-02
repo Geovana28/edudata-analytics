@@ -11,11 +11,21 @@
 
 ---
 
-## 🖥️ Preview
+## 💡 Motivação do Projeto & Decisões Técnicas
 
-O dashboard apresenta um design **dark mode premium** com glassmorphism, gráficos interativos e animações suaves.
+As disparidades no desempenho do ENEM são amplamente debatidas, mas muitas vezes reduzidas a uma comparação binária simples entre escolas públicas e privadas. O objetivo do **EduData Analytics** foi estruturar um modelo econométrico capaz de isolar o efeito da infraestrutura física escolar (laboratórios, bibliotecas, internet) controlando pelo nível socioeconômico familiar (renda e escolaridade materna).
 
-### Funcionalidades Principais
+### Decisões de Engenharia:
+1. **Arquitetura Autocontida (Zero Backend):**
+   Para permitir que qualquer avaliador ou gestor execute o projeto com um duplo clique no navegador, o painel foi construído em HTML5 semântico, JavaScript ES6+ e Chart.js via CDN, eliminando atritos de instalação de servidores locais.
+2. **Controle Econométrico (Mínimos Quadrados Ordinários - OLS):**
+   Em vez de apenas correlações superficiais, estimamos um modelo de regressão múltipla que demonstra que cada ponto adicional no índice de infraestrutura escolar agrega ganhos mensuráveis na proficiência média dos estudantes, mesmo ao controlar por renda.
+3. **Simulador com Feedback Imediato:**
+   O simulador de políticas públicas traduz coeficientes econométricos em sliders intuitivos, demonstrando o impacto projetado de investimentos estatais em conectividade e laboratórios.
+
+---
+
+## 🖥️ Módulos do Dashboard
 
 | Módulo | Descrição |
 |--------|-----------|
@@ -34,11 +44,22 @@ O dashboard apresenta um design **dark mode premium** com glassmorphism, gráfic
 - **OLS R² Ajustado:** `76.16%` — variância explicada pelo modelo econométrico
 - **5 variáveis explicativas:** ln(Renda), ln(PIB), Escola Privada, Infraestrutura, Escolaridade Mãe
 
-### Modelo OLS (Ordinary Least Squares)
+### Modelo Econométrico OLS (Mínimos Quadrados Ordinários)
 
 $$\text{Nota}_{ENEM} = 63.8 + 30.1 \cdot \ln(\text{Renda}) + 15.0 \cdot \ln(\text{PIB}) + 73.0 \cdot \text{Privada} + 0.75 \cdot \text{Infra} + 12.6 \cdot \text{EscMãe}$$
 
-Todos os coeficientes são estatisticamente significativos ($p < 0.001$).
+Todos os 5 regressores apresentam significância estatística ($p < 0.001$) na amostra analisada, e são complementados pela análise de importância relativa via *Random Forest* e matriz de correlação de Pearson no módulo **Econometria & ML**.
+
+### Dicionário de Variáveis e Limitações Metodológicas
+
+- **Variáveis**:
+  - `Nota_ENEM`: Proficiência média agregada nas provas objetivas e redação (escala 0–1000).
+  - `ln(Renda)`: Logaritmo natural da renda familiar mensal per capita.
+  - `ln(PIB)`: Logaritmo natural do PIB per capita municipal (IBGE).
+  - `Privada`: Variável *dummy* indicadora de dependência administrativa privada ($1 = \text{Privada}, 0 = \text{Pública}$).
+  - `Infra`: Índice composto de infraestrutura escolar ($0\text{–}100$, contemplando laboratório de ciências, informática, internet banda larga, biblioteca e quadra).
+  - `EscMãe`: Nível de escolaridade materna categorizado.
+- **Associação Estatística vs. Causalidade**: Os coeficientes estimados por OLS e as importâncias de variáveis por *Random Forest* refletem **associações condicionais observacionais** em dados em corte transversal (*cross-section*). Não devem ser interpretados como efeito causal direto sem estratégias adicionais de identificação (como variáveis instrumentais, *differences-in-differences* ou regressão descontínua) devido à potencial variável omitida (ex.: seleção familiar não observada).
 
 ---
 
